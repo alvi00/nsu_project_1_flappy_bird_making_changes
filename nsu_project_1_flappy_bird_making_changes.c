@@ -12,6 +12,7 @@
 #define YELLOW      "\e[33m"                        // ANSI code for yellow output
 #define NC          "\e[0m"                         // ANSI code for uncolord output
 char a;
+int exitFB;
 typedef struct
 {
     int x;
@@ -29,11 +30,14 @@ void load();                                        //For loading graphics
 void exitmenu();                                    //For exit menu having problem on this
 void intro();                                       //for intro wring hi
 void res();                                         //to add something later
-void record();                                      //to record the points
+void record();
+                                   //to record the points
 int main()
 {
     system("cls");
     mainmenu();
+    if(exitFB) return 0;
+    exitFB = 0;
     system("cls");
     srand(time(NULL));                              // Sets the seed for the random number generator to the current UNIX time stamp
     system("title \"Alvi is a good boy\"");
@@ -347,8 +351,7 @@ void load(){
     for(q=0;q<=100000000;q++);//to display the character slowly
     {printf("%c",177);}
     }
-    getch();
-     Sleep(1000);
+    Sleep(500);
 
 }
 void mainmenu()
@@ -366,16 +369,15 @@ void mainmenu()
     printf("                       $                                  $\n");
     printf("                       $                                  $\n");
     printf("                       ");
-    //a = getch();
+
+    printf("\n\tEnter your choice: ");
     scanf("%c",&a);
     if(a=='1')
     {
-    fflush(stdin);
-    system("cls");
-    intro();
-    load();
-    return 0;
-    system("cls");
+        fflush(stdin);
+        system("cls");
+        intro();
+        load();
     }
     else if(a=='2')
     {
@@ -405,7 +407,8 @@ void exitmenu()
     Sleep(1500);
     record();
     Sleep(1500);
-    exit(0);
+    exitFB = 1;
+    return 0;
 
 }
 void intro()
